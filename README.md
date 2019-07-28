@@ -17,3 +17,10 @@ requires gradle
 
 cd .../disease-classifier/server  
 gradle bootRun
+
+Database:
+
+MySQL (docker)
+
+
+29/7/2019: this is an active WIP, updated build instructions to come soon
