@@ -19,7 +19,7 @@ class EgfrComponent extends React.Component {
       }
 
     render() {
-        this.postData(`${process.env.REACT_APP_API_URL}/egfr`, [{ egfr: 70, atDate: Date.now() }])
+        this.postData(`${process.env.REACT_APP_API_URL}/egfr`, { egfr: null, atDate: Date.now() })
 
         return <div>Kidney Disease</div>
     }
