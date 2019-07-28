@@ -1,27 +1,60 @@
 import React from 'react';
+import '../styles/sharedStyles.scss';
+import DatePicker from "react-datepicker";
+import { postData } from "../services/httpPost";
  
-class EgfrComponent extends React.Component {
+interface IProps {}
+interface IState {
+    egfr: number | undefined,
+    atDate: Date,
+    classification: string | undefined,
+}
 
-    postData = async (url = '', data = {}) => {
-          const response = await fetch(url, {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            body: JSON.stringify(data),
-        });
-        return await response.json();
-      }
+class EgfrComponent extends React.PureComponent<IProps, IState> {
+    constructor(props: IProps) {
+        super(props)
+        
+        this.state = {
+            egfr: undefined,
+            atDate: new Date(),
+            classification: undefined,
+        }
+    }
+
+    dateChangeHandler(date: any) {
+        this.setState({ atDate: new Date(date) });
+    }
+
+    submit(egfr: number, atDate: Date) {
+        postData(`${process.env.REACT_APP_API_URL}/egfr`, { egfr: egfr, atDate: atDate })
+        .then(data => console.log(data)) // TODO
+        .catch(error => console.error(error));
+    }
 
     render() {
-        this.postData(`${process.env.REACT_APP_API_URL}/egfr`, { egfr: null, atDate: Date.now() })
-
-        return <div>Kidney Disease</div>
+        return <div className="form-input">
+         <input
+            placeholder="eGFR"
+            type="number"
+            id="egfr"
+            autoComplete="off"
+            value={this.state.egfr ? this.state.egfr : ''}
+            onChange={(event) => this.setState({ egfr: parseInt(event.target.value) })}
+        />
+        <DatePicker
+            selected={this.state.atDate}
+            onChange={(event) => this.dateChangeHandler(event)}
+        />
+        
+        <div></div><button
+            className="submit"
+            onClick={() => this.submit(
+                this.state.egfr ? this.state.egfr : -1,
+                this.state.atDate
+            )}
+        >Submit</button>
+        <div></div>
+    </div>
     }
 }
 

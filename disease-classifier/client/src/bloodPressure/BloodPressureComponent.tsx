@@ -1,7 +1,8 @@
 import React from 'react';
-import './bloodPressure.scss';
+import '../styles/sharedStyles.scss';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { postData } from "../services/httpPost";
 
 interface IProps {}
 interface IState {
@@ -23,57 +24,35 @@ class Hypertension extends React.PureComponent<IProps, IState> {
         }
     }
 
-    // formatDate(date: Date) {
-    //     return `${date.getFullYear().toString()}-${(date.getMonth() + 1).toString().padStart(2, "0")}-` +
-    //         `${date.getDate().toString().padStart(2, "0")}`;
-    // }
-
-    postData = async (url = '', data = {}) => {
-          const response = await fetch(url, {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow',
-            referrer: 'no-referrer',
-            body: JSON.stringify(data),
-        });
-        return await response.json();
-    }
-
     dateChangeHandler(date: any) {
         this.setState({ atDate: new Date(date) });
     }
 
     submit(sysBp: number, diaBp: number, atDate: Date) {
-        this.postData(`${process.env.REACT_APP_API_URL}/hypertension`, { sysBp: sysBp, diaBp: diaBp, atDate: atDate })
+        postData(`${process.env.REACT_APP_API_URL}/hypertension`, { sysBp: sysBp, diaBp: diaBp, atDate: atDate })
         .then(data => console.log(data)) // TODO
         .catch(error => console.error(error));
     }
 
     render() {
 
-        return <div className="hypertension-form-input">
-            <label className="form-lbl">Systole</label>
+        return <div className="form-input">
             <input
+                placeholder="Systole"
                 type="number"
                 id="sysBp"
                 autoComplete="off"
                 value={this.state.sysBp ? this.state.sysBp : ''}
                 onChange={(event) => this.setState({ sysBp: parseInt(event.target.value) })}
             />
-            <label className="form-lbl">Diastole</label>
             <input
+                placeholder="Diastole"
                 type="number"
                 id="diaBp"
                 autoComplete="off"
                 value={this.state.diaBp ? this.state.diaBp : ''}
                 onChange={(event) => this.setState({ diaBp: parseInt(event.target.value) })}
             />
-            <label className="form-lbl">Date</label>
             <DatePicker
                 selected={this.state.atDate}
                 onChange={(event) => this.dateChangeHandler(event)}

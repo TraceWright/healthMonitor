@@ -1,26 +1,12 @@
 $grey: rgba(255,255,255,.5);
 $primarycolor: #f39c12;
 
-.hypertension-form-input {
+.form-input {
     display: grid;
     padding: 10%;
-    grid-template-columns: 20% 300px;
+    grid-template-columns: 100%;
     grid-gap: 10px;
     color: $grey;
-
-    label {
-        line-height: 2em;
-    }
-
-    .form-units {
-        text-align: left;
-    }
-
-    .form-lbl {
-        font-size: 1.5em;
-        line-height: 2em;
-        text-align: right;
-    }
 
     input {
         border:2px solid $grey;
@@ -30,7 +16,6 @@ $primarycolor: #f39c12;
         height: 30px;
         width: 100%;
         max-width: 250px;
-        margin-left: 20px;
         
         &:focus{
             outline:none;
@@ -50,8 +35,6 @@ $primarycolor: #f39c12;
         background-color: $primarycolor;
         border:2px solid $primarycolor;
         color: $primarycolor;
-        margin-left: 34px;
-        margin-top: 100px;
         
         &:focus{
             outline: none;
@@ -64,5 +47,10 @@ $primarycolor: #f39c12;
         font-size:1.5em;
         width: 180px;
         padding:.25em .5em .3125em;
+        margin:auto;
+    }
+
+    .react-datepicker-wrapper {
+        margin: auto;
     }
 }
