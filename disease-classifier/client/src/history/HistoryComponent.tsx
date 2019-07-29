@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/sharedStyles.scss';
+import '../styles/formStyles.scss';
 import "react-datepicker/dist/react-datepicker.css";
 
 interface IProps {}

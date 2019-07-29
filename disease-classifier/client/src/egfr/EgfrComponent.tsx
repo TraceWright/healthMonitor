@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/sharedStyles.scss';
+import '../styles/formStyles.scss';
 import DatePicker from "react-datepicker";
 import { postData } from "../services/httpPost";
  

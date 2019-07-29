@@ -1,5 +1,7 @@
 import React from 'react';
-import '../styles/sharedStyles.scss';
+import './bloodPressure.scss';
+import '../styles/formStyles.scss';
+import '../styles/checkmark.scss';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { postData } from "../services/httpPost";
@@ -10,6 +12,7 @@ interface IState {
     diaBp: number | undefined,
     atDate: Date,
     classification: string | undefined,
+    checkmark: boolean
 }
  
 class Hypertension extends React.PureComponent<IProps, IState> {
@@ -21,6 +24,7 @@ class Hypertension extends React.PureComponent<IProps, IState> {
             diaBp: undefined,
             atDate: new Date(),
             classification: undefined,
+            checkmark: false,
         }
     }
 
@@ -30,7 +34,14 @@ class Hypertension extends React.PureComponent<IProps, IState> {
 
     submit(sysBp: number | undefined, diaBp: number | undefined, atDate: Date) {
         postData(`${process.env.REACT_APP_API_URL}/bloodpressure`, { sysBp: sysBp, diaBp: diaBp, atDate: atDate })
-        .then(data => console.log(data)) // TODO
+        .then(response => {
+            console.log(response);
+            if (response.status === 400) {
+                // validation error
+            } else if (response.sysBp && response.diaBp && response.atDate) {
+                this.setState({checkmark: true});
+            }
+        })
         .catch(error => console.error(error));
     }
 
@@ -65,7 +76,9 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                     this.state.atDate
                 )}
             >Submit</button>
-            <div></div>
+            <div className="checkbox-wrapper">
+                <div style={{display: this.state.checkmark ? 'block' : 'none'}} className="check-wrap"></div>
+            </div>
         </div>
     }
 }
