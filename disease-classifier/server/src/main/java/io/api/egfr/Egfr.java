@@ -1,4 +1,4 @@
-package io.api.kidneydisease;
+package io.api.egfr;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package io.api.hypertension;
+package io.api.bloodpressure;
 
 import java.util.Date;
 
