@@ -5,6 +5,7 @@ import '../styles/checkmark.scss';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { postData } from "../services/httpPost";
+import { bpClassification } from "../enums/bpClassification";
 
 interface IProps {}
 interface IState {
@@ -12,7 +13,7 @@ interface IState {
     diaBp: number | undefined,
     atDate: Date,
     classification: string | undefined,
-    checkmark: boolean
+    success: boolean
 }
  
 class Hypertension extends React.PureComponent<IProps, IState> {
@@ -24,7 +25,7 @@ class Hypertension extends React.PureComponent<IProps, IState> {
             diaBp: undefined,
             atDate: new Date(),
             classification: undefined,
-            checkmark: false,
+            success: false,
         }
     }
 
@@ -39,7 +40,13 @@ class Hypertension extends React.PureComponent<IProps, IState> {
             if (response.status === 400) {
                 // validation error
             } else if (response.sysBp && response.diaBp && response.atDate) {
-                this.setState({checkmark: true});
+                this.setState({
+                    sysBp: response.sysBp,
+                    diaBp: response.diaBp,
+                    atDate: new Date(response.atDate),
+                    classification: response.classification,
+                    success: true,
+                });
             }
         })
         .catch(error => console.error(error));
@@ -77,7 +84,26 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                 )}
             >Submit</button>
             <div className="checkbox-wrapper">
-                <div style={{display: this.state.checkmark ? 'block' : 'none'}} className="check-wrap"></div>
+                <div style={{display: this.state.success ? 'block' : 'none'}} className="check-wrap"></div>
+            </div>
+            <div className="results">
+                <label style={{display: this.state.success ? 'block' : 'none'}}>
+                    {`Submitted blood pressure: ${this.state.sysBp}/${this.state.diaBp} mmHg`}
+                </label>
+            </div>
+            <div className="results">
+                <label style={{display: this.state.success ? 'block' : 'none'}}>
+                    {`For date: ${this.state.atDate.toDateString()}`}
+                </label>
+            </div>
+            <div className="results">
+                <label style={{display: this.state.success ? 'block' : 'none'}}>
+                    {`Classification: ${
+                        typeof this.state.classification  === 'number' ?
+                        bpClassification[parseInt(this.state.classification)] :
+                        ''
+                    }`}
+                </label>
             </div>
         </div>
     }
