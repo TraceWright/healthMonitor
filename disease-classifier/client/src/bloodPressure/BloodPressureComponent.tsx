@@ -29,7 +29,7 @@ class Hypertension extends React.PureComponent<IProps, IState> {
     }
 
     submit(sysBp: number, diaBp: number, atDate: Date) {
-        postData(`${process.env.REACT_APP_API_URL}/hypertension`, { sysBp: sysBp, diaBp: diaBp, atDate: atDate })
+        postData(`${process.env.REACT_APP_API_URL}/bloodpressure`, { sysBp: sysBp, diaBp: diaBp, atDate: atDate })
         .then(data => console.log(data)) // TODO
         .catch(error => console.error(error));
     }
