@@ -31,7 +31,7 @@ $primarycolor: #f39c12;
         }
     }
 
-    .submit {
+    .submit, .reset {
         background-color: $primarycolor;
         border:2px solid $primarycolor;
         color: $primarycolor;
@@ -41,7 +41,7 @@ $primarycolor: #f39c12;
         }
     }
 
-    input, .submit {
+    input, .submit, .reset {
         border-radius:.25em;
         background:transparent;
         font-size:1.5em;
@@ -56,5 +56,6 @@ $primarycolor: #f39c12;
 
     .results {
         text-align: center;
+        color: ghostwhite;
     }
 }
