@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import Hypertension from './bloodPressure/BloodPressureComponent';
 import EgfrComponent from './egfr/EgfrComponent';
-import MenuContainer from "./routing/menu";
+import HistoryComponent from './history/HistoryComponent';
+import MenuContainer from "./menu/menu";
 
 const App: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const App: React.FC = () => {
         <Route path="/home" exact component={MenuContainer} />
         <Route path="/bloodpressure/" component={Hypertension} />
         <Route path="/egfr/" component={EgfrComponent} />
+        <Route path="/history/" component={HistoryComponent} />
     </BrowserRouter>
   );
 }
