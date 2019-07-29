@@ -1,18 +1,15 @@
 package io.api.bloodpressure;
 
 import java.util.Date;
-
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Range;
 
 public class BloodPressure {
 
-    @NotNull
-    @Size(min=1, max=3)
+    @Range(min = 1, max = 500, message = "{validation.range}")
     private final short sysBp;
 
-    @NotNull
-    @Size(min=1, max=3)
+    @Range(min = 1, max = 500, message = "{validation.range}")
     private final short diaBp;
 
     @NotNull

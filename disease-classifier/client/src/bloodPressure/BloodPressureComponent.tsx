@@ -28,7 +28,7 @@ class Hypertension extends React.PureComponent<IProps, IState> {
         this.setState({ atDate: new Date(date) });
     }
 
-    submit(sysBp: number, diaBp: number, atDate: Date) {
+    submit(sysBp: number | undefined, diaBp: number | undefined, atDate: Date) {
         postData(`${process.env.REACT_APP_API_URL}/bloodpressure`, { sysBp: sysBp, diaBp: diaBp, atDate: atDate })
         .then(data => console.log(data)) // TODO
         .catch(error => console.error(error));
@@ -60,8 +60,8 @@ class Hypertension extends React.PureComponent<IProps, IState> {
             <div></div><button
                 className="submit"
                 onClick={() => this.submit(
-                    this.state.sysBp ? this.state.sysBp : -1,
-                    this.state.diaBp ? this.state.diaBp : -1,
+                    this.state.sysBp,
+                    this.state.diaBp,
                     this.state.atDate
                 )}
             >Submit</button>

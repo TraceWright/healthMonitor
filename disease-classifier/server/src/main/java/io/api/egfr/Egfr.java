@@ -4,10 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import java.util.Date;
-import javax.validation.constraints.NotNull;
-// import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class Egfr {
@@ -16,7 +14,7 @@ public class Egfr {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotNull(message = "Please provide an eGFR value")
+    @Range(min = 1, max = 2000, message = "{validation.range}")
     private Float egfr;
     private Date atDate;
     
