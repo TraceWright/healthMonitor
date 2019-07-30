@@ -3,7 +3,7 @@ $primarycolor: #f39c12;
 
 .form-input {
     display: grid;
-    padding: 10%;
+    padding: 15% 10%;
     grid-template-columns: 100%;
     grid-gap: 10px;
     color: $grey;
@@ -35,6 +35,7 @@ $primarycolor: #f39c12;
         background-color: $primarycolor;
         border:2px solid $primarycolor;
         color: $primarycolor;
+        margin-top: 30px !important;
         
         &:focus{
             outline: none;
@@ -57,5 +58,11 @@ $primarycolor: #f39c12;
     .results {
         text-align: center;
         color: ghostwhite;
+    }
+
+    .validation-error {
+        text-align: center;
+        color: red;
+        line-height: 6px;
     }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-import '../styles/formStyles.scss';
-import "react-datepicker/dist/react-datepicker.css";
+import '../../styles/formStyles.scss';
 
 interface IProps {}
 interface IState {

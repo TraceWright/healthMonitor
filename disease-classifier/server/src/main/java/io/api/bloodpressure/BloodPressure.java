@@ -6,10 +6,10 @@ import org.hibernate.validator.constraints.Range;
 
 public class BloodPressure {
 
-    @Range(min = 1, max = 500, message = "{validation.range}")
+    @Range(min = 1, max = 500, message = "{validation.input.generic}")
     private final short sysBp;
 
-    @Range(min = 1, max = 500, message = "{validation.range}")
+    @Range(min = 1, max = 500, message = "{validation.input.generic}")
     private final short diaBp;
 
     @NotNull

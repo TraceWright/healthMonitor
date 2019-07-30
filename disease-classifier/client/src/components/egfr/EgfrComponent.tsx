@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/formStyles.scss';
+import '../../styles/formStyles.scss';
 import DatePicker from "react-datepicker";
-import { postData } from "../services/httpPost";
+import { postData } from "../../services/httpPost";
  
 interface IProps {}
 interface IState {
