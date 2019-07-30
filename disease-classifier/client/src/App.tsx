@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Hypertension from './components/bloodPressure/BloodPressureComponent';
 import EgfrComponent from './components/egfr/EgfrComponent';
 import HistoryComponent from './components/history/HistoryComponent';
-import MenuContainer from "./menu/menu";
+import MenuContainer from "./components/menu/menu";
 
 const App: React.FC = () => {
   return (
