@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { postData } from "../../services/httpPost";
 import { bpClassification } from "../../enums/bpClassification";
-import { VALIDATION_MSG, isNotEmpty, isNumeric, isNumericInRange } from "../../utilities/validation";
+import { VALIDATION_MSG, inputValidations } from "../../utilities/validation";
 
 interface IProps {}
 
@@ -14,33 +14,40 @@ interface IValidationState {
     sysBp: { 
         valid: boolean,
         message: string,
+        touched: boolean,
     },
     diaBp: { 
         valid:  boolean,
         message: string,
+        touched: boolean,
     },
     atDate: { 
         valid: boolean,
         message: string,
+        touched: boolean,
     },
     [index: string]: {
         valid: boolean,
         message: string,
+        touched: boolean,
     }
 }
 
 const initialValidationState: IValidationState = {
     sysBp: { 
-        valid: true,
-        message: ''
+        valid: false,
+        message: '',
+        touched: false,
     },
     diaBp: { 
-        valid: true,
-        message: ''
+        valid: false,
+        message: '',
+        touched: false,
     },
     atDate: { 
         valid: true,
-        message: ''
+        message: '',
+        touched: false,
     },
 }
 
@@ -53,7 +60,6 @@ interface IState {
     checkmark: boolean,
     success: boolean,
     validation: IValidationState,
-    
 }
  
 class Hypertension extends React.PureComponent<IProps, IState> {
@@ -84,23 +90,26 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                     [field]: {
                         ...prevState.validation[field],
                         valid,
-                        message
+                        message,
+                        touched: true
                     }
                 }                                    
             });
         });
     }
 
-    bpValidations(value: string): boolean {
-        return isNotEmpty(value) && isNumeric(value) && isNumericInRange(value, 1, 500);
+    private onBlurValidate(field: keyof IValidationState, value: string): void {
+        inputValidations(value) ?
+            this.resetValidation({ ...this.state.validation, [field]: { valid: true, message: '', touched: true }}) :
+            this.setValidation(field, VALIDATION_MSG, false)
     }
 
-    validateAll(state: IState) {
-        state.sysBp && this.bpValidations(state.sysBp.toString()) ? Function.prototype() : this.setValidation("sysBp", VALIDATION_MSG, false)
-        state.diaBp && this.bpValidations(state.diaBp.toString()) ? Function.prototype() : this.setValidation("diaBp", VALIDATION_MSG, false)
+    private validateAll(state: IState): void {
+        state.sysBp && inputValidations(state.sysBp.toString()) ? Function.prototype() : this.setValidation("sysBp", VALIDATION_MSG, false)
+        state.diaBp && inputValidations(state.diaBp.toString()) ? Function.prototype() : this.setValidation("diaBp", VALIDATION_MSG, false)
     }
 
-    private resetValidation(validationState: IValidationState) {
+    private resetValidation(validationState: IValidationState): void {
         this.setState({ validation: validationState });
     }
 
@@ -163,14 +172,10 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                 id="sysBp"
                 autoComplete="off"
                 value={this.state.sysBp ? this.state.sysBp : ''}
-                onChange={(e) => this.handleChange("sysBp", parseInt(e.target.value))}
+                onChange={(e) => this.handleChange(e.target.id, parseInt(e.target.value))}
                 disabled={this.state.submitted ? true : false}
-                style={{ border: this.state.validation.sysBp.valid ? '' : '2px solid red'}}
-                onBlur={(e) => 
-                    this.bpValidations(e.target.value) ?
-                    this.resetValidation( {...this.state.validation, sysBp: { valid: true, message: ''}}) :
-                    this.setValidation("sysBp", VALIDATION_MSG, false)
-                }
+                style={{ border: this.state.validation.sysBp.valid === false && this.state.validation.sysBp.touched ? '2px solid red' : ''}}
+                onBlur={(e) => this.onBlurValidate(e.target.id, e.target.value)}
             />
             <label
                 className="validation-error"
@@ -182,14 +187,10 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                 id="diaBp"
                 autoComplete="off"
                 value={this.state.diaBp ? this.state.diaBp : ''}
-                onChange={(e) => this.handleChange("diaBp", parseInt(e.target.value))}
+                onChange={(e) => this.handleChange(e.target.id, parseInt(e.target.value))}
                 disabled={this.state.submitted ? true : false}
-                style={{ border: this.state.validation.diaBp.valid ? '' : '2px solid red'}}
-                onBlur={(e) => 
-                    this.bpValidations(e.target.value) ?
-                    this.resetValidation({...this.state.validation, diaBp: { valid: true, message: ''}}) :
-                    this.setValidation("diaBp", VALIDATION_MSG, false)
-                }
+                style={{ border: this.state.validation.diaBp.valid === false && this.state.validation.diaBp.touched ? '2px solid red' : ''}}
+                onBlur={(e) => this.onBlurValidate(e.target.id, e.target.value)}
             />
             <label
                 className="validation-error"
@@ -210,10 +211,7 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                     this.state.atDate,
                     this.state.validation,
                 )}
-                disabled={
-                    this.state.submitted ? 
-                    true : false
-                }
+                disabled={ this.state.submitted ? true : false }
             >Submit</button>
             <button
                 className="reset"
