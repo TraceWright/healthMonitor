@@ -8,14 +8,14 @@ public class EgfrDrop {
     @NotNull
     private ArrayList<Egfr> egfrLatest;
     private Egfr egfr;
-    private Boolean hasDropped;
-    private Float maxPercentageDrop;
+    private Boolean hasDropped20Pct;
+    private Float maxDailyPctDrop;
     
-    public EgfrDrop(ArrayList<Egfr> egfrLatest, Egfr egfr, Boolean hasDropped, Float maxPercentageDrop) {
+    public EgfrDrop(ArrayList<Egfr> egfrLatest, Egfr egfr, Boolean hasDropped20Pct, Float maxDailyPctDrop) {
         this.egfrLatest = egfrLatest;
         this.egfr = egfr;
-        this.hasDropped = hasDropped;
-        this.maxPercentageDrop = maxPercentageDrop;
+        this.hasDropped20Pct = hasDropped20Pct;
+        this.maxDailyPctDrop = maxDailyPctDrop;
     }
     
     public ArrayList<Egfr> getEgfrLatest() {
@@ -26,11 +26,11 @@ public class EgfrDrop {
         return egfr;
     }
     
-    public Boolean getHasDropped() {
-        return hasDropped;
+    public Boolean getHasDropped20Pct() {
+        return hasDropped20Pct;
     }
 
-    public Float getMaxPercentageDrop() {
-        return maxPercentageDrop;
+    public Float getMaxDailyPctDrop() {
+        return maxDailyPctDrop;
     }
 }

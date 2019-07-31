@@ -17,7 +17,7 @@ public class EgfrController extends EgfrService {
     public EgfrDrop Egfr(@RequestBody Egfr egfr) {
         ArrayList<Egfr> latestEgfr = egfrRepository.findAllEgfrForLatestDate();
         egfrRepository.save(egfr);
-        return getEgfrDropService(latestEgfr, egfr);
+        return EvalEgfrDropService(latestEgfr, egfr);
     }
 
     @GetMapping("/egfr-history")

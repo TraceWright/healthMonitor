@@ -12,14 +12,10 @@ public interface EgfrRepository extends JpaRepository<Egfr, Integer> {
     // -------------------------------------------------------------- //
     // specification limitation:
     // data is stored at yyyy/dd/mm precision so if there's multiple records per day, we need to 
-    // return a list rather than just one object.
-    // note that further development of more detailed business logic is required to make this a high quality system
+    // return a list rather than just one item.
 
-    // @Query(value = "SELECT eg.id, eg.at_date, eg.egfr FROM egfr as eg WHERE eg.at_date IN" + 
-    //     "(SELECT MAX(e.at_date) FROM egfr as e) ORDER BY eg.egfr ASC", nativeQuery = true)
     @Query(value = "SELECT eg.id, eg.at_date, eg.egfr FROM egfr as eg WHERE eg.at_date IN" + 
-        "(SELECT MAX(e.at_date) FROM egfr as e) ORDER BY eg.egfr DESC", nativeQuery = true) // order by DESC required for EgfrQueryDrop
-    // public Iterable<Egfr> findAllEgfrForLatestDate();
+        "(SELECT MAX(e.at_date) FROM egfr as e) ORDER BY eg.egfr DESC", nativeQuery = true) // order by DESC required for EvalEgfrDropService
     public ArrayList<Egfr> findAllEgfrForLatestDate();
 
     // -------------------------------------------------------------- //
