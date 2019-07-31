@@ -2,6 +2,8 @@ package io.api.bloodpressure;
 
 import java.util.Date;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
 import org.hibernate.validator.constraints.Range;
 
 public class BloodPressure {
@@ -13,6 +15,7 @@ public class BloodPressure {
     private final short diaBp;
 
     @NotNull
+    @PastOrPresent
     private final Date atDate;
     
     public BloodPressure(short sysBp, short diaBp, Date atDate, byte classification) {

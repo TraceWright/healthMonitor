@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.PastOrPresent;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.hibernate.validator.constraints.Range;
 
@@ -32,8 +33,9 @@ public class Egfr {
         return egfr;
     }
 
-    public Date getAtDate() {
-        return atDate;
+    public String getAtDate() {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
+        return f.format(atDate);
     }
 
     public Integer getId() {
