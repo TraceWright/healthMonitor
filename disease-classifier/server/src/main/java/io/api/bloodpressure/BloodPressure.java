@@ -18,7 +18,7 @@ public class BloodPressure {
     @PastOrPresent
     private final Date atDate;
     
-    public BloodPressure(short sysBp, short diaBp, Date atDate) {
+    public BloodPressure(short sysBp, short diaBp, Date atDate, byte classification) {
         this.sysBp = sysBp;
         this.diaBp = diaBp;
         this.atDate = atDate;
@@ -34,5 +34,19 @@ public class BloodPressure {
 
     public Date getAtDate() {
         return atDate;
+    }
+
+    public byte getClassification() {
+        byte classification;
+        if (sysBp >= 180 || diaBp >= 120) {
+            classification = 3;
+        } else if (sysBp >= 160 || diaBp >= 100) {
+            classification = 2;
+        } else if (sysBp >= 140 || diaBp >= 90) {
+            classification = 1;
+        } else {
+            classification = 0;
+        }
+        return classification; 
     }
 }
