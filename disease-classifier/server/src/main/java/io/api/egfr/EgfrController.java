@@ -1,6 +1,9 @@
 package io.api.egfr;
 
 import java.util.ArrayList;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +18,7 @@ public class EgfrController extends EgfrService {
     private EgfrRepository egfrRepository;
 
     @PostMapping("/egfr")
-    public EgfrEvaluate Egfr(@RequestBody Egfr egfr) {
+    public EgfrEvaluate Egfr(@Valid @RequestBody Egfr egfr) {
         ArrayList<Egfr> latestEgfr = egfrRepository.findAllEgfrForLatestDate();
         egfrRepository.save(egfr);
         return EvaluateEgfr(latestEgfr, egfr);

@@ -17,7 +17,7 @@ public class Egfr {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Range(min = 1, max = 2000, message = "{validation.range}")
+    @Range(min = 1, max = 2000, message = "{validation.input.generic}")
     private Float egfr;
     
     @PastOrPresent
