@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import io.api.egfr.egfrmodels.EgfrEvaluate;
 
 @RestController
 public class EgfrController extends EgfrService {
@@ -14,10 +15,10 @@ public class EgfrController extends EgfrService {
     private EgfrRepository egfrRepository;
 
     @PostMapping("/egfr")
-    public EgfrDrop Egfr(@RequestBody Egfr egfr) {
+    public EgfrEvaluate Egfr(@RequestBody Egfr egfr) {
         ArrayList<Egfr> latestEgfr = egfrRepository.findAllEgfrForLatestDate();
         egfrRepository.save(egfr);
-        return EvalEgfrDropService(latestEgfr, egfr);
+        return EvaluateEgfr(latestEgfr, egfr);
     }
 
     @GetMapping("/egfr-history")

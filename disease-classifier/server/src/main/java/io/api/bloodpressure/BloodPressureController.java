@@ -13,8 +13,7 @@ public class BloodPressureController {
         return new BloodPressure(
             hypertension.getSysBp(),
             hypertension.getDiaBp(),
-            hypertension.getAtDate(),
-            hypertension.getClassification()
+            hypertension.getAtDate()
         );
     }
 }

@@ -24,7 +24,7 @@ public class Egfr {
     private Date atDate;
     
     public Egfr() {}
-    public Egfr(Float egfr, Date atDate, byte classification, Boolean hasDropped) {
+    public Egfr(Float egfr, Date atDate) {
         this.egfr = egfr;
         this.atDate = atDate;
     }
@@ -40,24 +40,6 @@ public class Egfr {
 
     public Integer getId() {
         return id;
-    }
-
-    public byte getClassification() {
-        byte classification;
-        if (egfr >= 90) {
-            classification = 0;
-        } else if (egfr >= 60) {
-            classification = 1;
-        } else if (egfr >= 45) {
-            classification = 2;
-        } else if (egfr >= 30) {
-            classification = 3;
-        } else if (egfr >= 15) {
-            classification = 4;
-        } else {
-            classification = 5;
-        }
-        return classification; 
     }
 
 }
