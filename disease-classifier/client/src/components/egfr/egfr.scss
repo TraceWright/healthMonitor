@@ -1,0 +1,13 @@
+$grey: rgba(255,255,255,.5);
+
+.results {
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+        height: 200px;
+        width: 80%;
+        overflow: auto;
+        margin: auto;
+        margin-top: 10px;
+    }
+}

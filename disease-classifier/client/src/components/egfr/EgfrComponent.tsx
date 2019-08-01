@@ -1,5 +1,7 @@
 import React from 'react';
 import '../../styles/formStyles.scss';
+import './egfr.scss';
+
 import DatePicker from "react-datepicker";
 import { postData } from "../../services/httpPost";
 import { VALIDATION_MSG, inputValidations } from "../../utilities/validation";
@@ -33,13 +35,22 @@ const initialValidationState: IValidationState = {
     },
 }
 
+interface IEgfr {
+    id: number,
+    egfr: number,
+    atDate: String,
+}
+
 interface IState {
     egfr: number | undefined,
     atDate: Date,
     classification: string | undefined,
-    submitted: boolean,
-    checkmark: boolean,
-    success: boolean,
+    hasDropped20Pct: Boolean,
+    maxDailyPctDrop: number | undefined,
+    egfrLatest: IEgfr[],
+    submitted: Boolean,
+    checkmark: Boolean,
+    success: Boolean,
     validation: IValidationState
 }
 
@@ -51,6 +62,9 @@ class EgfrComponent extends React.PureComponent<IProps, IState> {
             egfr: undefined,
             atDate: new Date(),
             classification: undefined,
+            hasDropped20Pct: false,
+            maxDailyPctDrop: undefined,
+            egfrLatest: [],
             submitted: false,
             checkmark: false,
             success: false,
@@ -102,6 +116,12 @@ class EgfrComponent extends React.PureComponent<IProps, IState> {
         this.setState({ atDate: new Date(date) });
     }
 
+    mapEgfrLatest(egfrLatest: IEgfr[]) {
+        return egfrLatest.map((el: IEgfr) => {
+            return <li key={el.id}>eGFR: {el.egfr} Date: {el.atDate}</li>
+        })
+    }
+
     submit(egfr: number, atDate: Date, validation: IValidationState) {
         this.validateAll(this.state);
         if (this.areAllValid(validation) !== false) {
@@ -120,13 +140,18 @@ class EgfrComponent extends React.PureComponent<IProps, IState> {
                             console.error(response.error);
                         }
                     }
-                } else if (response.egfr && response.egfr.egfr && response.egfr.atDate) {
+                } else if (response.egfr && response.egfr.egfr && response.egfr.atDate && response.evaluatePercentageDrop
+                    && typeof response.evaluatePercentageDrop.hasDropped20Pct === "boolean" && typeof response.evaluatePercentageDrop.maxDailyPctDrop === 'number'
+                    && response.egfrLatest) {
                     this.setState({
                         egfr: response.egfr.egfr,
                         atDate: new Date(response.egfr.atDate),
                         classification: response.classification,
                         success: true,
                         checkmark: true,
+                        hasDropped20Pct: response.evaluatePercentageDrop.hasDropped20Pct,
+                        maxDailyPctDrop: response.evaluatePercentageDrop.maxDailyPctDrop,
+                        egfrLatest: response.egfrLatest
                     });
                     this.resetValidation(initialValidationState);
                     setTimeout(() => { this.setState({ checkmark: false }) }, 1200);
@@ -202,6 +227,17 @@ class EgfrComponent extends React.PureComponent<IProps, IState> {
                         ''
                     }`}
                 </label>
+            </div>
+            <div className="results" style={{ visibility: this.state.hasDropped20Pct ? 'visible' : 'hidden' }}>
+                <label className={ this.state.success && this.state.checkmark === false ? 'enter-active' : 'enter' }>
+                    {`There has been recent significant drop in eGFR of ${this.state.maxDailyPctDrop ? Math.round(this.state.maxDailyPctDrop * 100) / 100 : ''}%`}
+                </label>
+            </div>
+            <div className="results">
+                {/* <label>Recent Submission/s</label> */}
+                <ul className={ this.state.success && this.state.checkmark === false ? 'enter-active' : 'enter' }>
+                    {this.state.egfrLatest ? this.mapEgfrLatest(this.state.egfrLatest) : Function.prototype()}
+                </ul>
             </div>
     </div>
     }
