@@ -1,6 +1,6 @@
 package io.api.egfr.egfrmodels;
 
-import io.api.egfr.Egfr;
+import io.api.egfr.egfrmodels.Egfr;
 
 public class EgfrClassification {
     

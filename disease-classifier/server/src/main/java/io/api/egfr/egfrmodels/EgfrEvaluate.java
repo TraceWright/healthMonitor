@@ -3,7 +3,7 @@ package io.api.egfr.egfrmodels;
 import java.util.ArrayList;
 import javax.validation.constraints.NotNull;
 
-import io.api.egfr.Egfr;
+import io.api.egfr.egfrmodels.Egfr;
 import io.api.egfr.egfrmodels.EgfrPercentageDrop;
 
 public class EgfrEvaluate {

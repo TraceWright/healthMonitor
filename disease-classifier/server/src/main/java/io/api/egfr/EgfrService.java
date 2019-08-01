@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import io.api.egfr.egfrmodels.EgfrClassification;
 import io.api.egfr.egfrmodels.EgfrEvaluate;
 import io.api.egfr.egfrmodels.EgfrPercentageDrop;
+import io.api.egfr.egfrmodels.Egfr;
 
 @Service
 public class EgfrService {

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import io.api.egfr.egfrmodels.Egfr;
+
 public interface EgfrRepository extends JpaRepository<Egfr, Integer> {
     Iterable<Egfr> findTop10ByOrderByAtDateDesc();
 

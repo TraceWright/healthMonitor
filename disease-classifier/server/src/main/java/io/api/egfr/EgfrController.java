@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import io.api.egfr.egfrmodels.EgfrEvaluate;
+import io.api.egfr.egfrmodels.Egfr;
 
 @RestController
 public class EgfrController extends EgfrService {

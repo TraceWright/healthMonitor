@@ -1,4 +1,4 @@
-package io.api.egfr;
+package io.api.egfr.egfrmodels;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
