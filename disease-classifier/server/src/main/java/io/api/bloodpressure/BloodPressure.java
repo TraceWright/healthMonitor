@@ -15,7 +15,7 @@ public class BloodPressure {
     private final short diaBp;
 
     @NotNull
-    @PastOrPresent
+    @PastOrPresent(message = "{validation.date.pastorpresent}")
     private final Date atDate;
     
     public BloodPressure(short sysBp, short diaBp, Date atDate, byte classification) {

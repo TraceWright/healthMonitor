@@ -20,7 +20,7 @@ public class Egfr {
     @Range(min = 1, max = 2000, message = "{validation.input.generic}")
     private Float egfr;
     
-    @PastOrPresent
+    @PastOrPresent(message = "{validation.date.pastorpresent}")
     private Date atDate;
     
     public Egfr() {}

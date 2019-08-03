@@ -79,6 +79,7 @@ class Hypertension extends React.PureComponent<IProps, IState> {
     }
     
     private dateChangeHandler(date: any): void {
+        this.resetValidation({ ...this.state.validation, atDate: { valid: true, message: '', touched: true }});
         this.setState({ atDate: new Date(date) });
     }
     
@@ -126,7 +127,6 @@ class Hypertension extends React.PureComponent<IProps, IState> {
         this.validateAll(this.state);
         if (this.areAllValid(validation) !== false) {
             this.setState({ submitted: true });
-            this.resetValidation(initialValidationState);
             postData(`${process.env.REACT_APP_API_URL}/bloodpressure`, { sysBp: sysBp, diaBp: diaBp, atDate: atDate })
             .then(response => {
                 // console.log(response);
@@ -150,6 +150,7 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                         success: true,
                         checkmark: true,
                     });
+                    this.resetValidation(initialValidationState);
                     setTimeout(() => { this.setState({ checkmark: false }) }, 1200);
                 }
             })
@@ -202,6 +203,10 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                 dateFormat="dd/MM/yyyy"
                 disabled={this.state.submitted ? true : false}
             />
+            <label
+                className="validation-error"
+                style={{ visibility: this.state.validation.atDate.valid ? 'hidden' : 'visible' }}
+            >{this.state.validation.atDate.message}</label>
             <button
                 className="submit"
                 style={{display: this.state.submitted ? 'none' : 'block'}}
