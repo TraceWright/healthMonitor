@@ -9,7 +9,7 @@ import io.api.egfr.egfrmodels.EgfrPercentageDrop;
 import io.api.egfr.egfrmodels.Egfr;
 
 @Service
-public class EgfrService {
+public abstract class EgfrService {
 
     public EgfrEvaluate EvaluateEgfr(ArrayList<Egfr> egfrLatest, Egfr egfr) 
     {
