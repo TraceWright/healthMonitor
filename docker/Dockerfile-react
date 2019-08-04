@@ -11,5 +11,7 @@ RUN bash -c ' \
     npm install \
     '
 
+WORKDIR /usr/src/disease-classifier/client
+
 EXPOSE 3000
 CMD npm start
