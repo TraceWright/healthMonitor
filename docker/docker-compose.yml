@@ -11,10 +11,10 @@ services:
     container_name: springboot-serverside
     depends_on:
       - db
+    env_file:
+      - 'variables.env'
     environment:
       MYSQL_HOST: db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: secret
     build:
       context: ./
       dockerfile: Dockerfile-spring
@@ -27,8 +27,8 @@ services:
     image: mysql:8.0.17
     ports:
       - "3306:3306" 
+    env_file:
+      - 'variables.env'
     environment:
       MYSQL_ROOT_PASSWORD: supersecret
       MYSQL_DATABASE: healthmonitor
-      MYSQL_USER: user
-      MYSQL_PASSWORD: secret
