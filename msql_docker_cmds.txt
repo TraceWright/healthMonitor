@@ -1,7 +1,7 @@
 docker run -p 3306:3306 --name mysql-spring -e MYSQL_ROOT_PASSWORD=password -d mysql:latest
 docker ps
 docker exec -it 83794ee9b356 mysql -uroot -p
-CREATE USER 'tracey'@'%' IDENTIFIED BY 'secret';
-GRANT ALL PRIVILEGES ON *.* TO 'tracey';
+CREATE USER 'user'@'%' IDENTIFIED BY 'secret';
+GRANT ALL PRIVILEGES ON *.* TO 'user';
 CREATE DATABASE healthmonitor;
 gradle flywayMigrate -i

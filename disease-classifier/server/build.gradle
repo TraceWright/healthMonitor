@@ -14,7 +14,7 @@ plugins {
 
 flyway {
     url = 'jdbc:mysql://localhost:3306/healthmonitor'
-    user = 'tracey'
+    user = 'user'
     password = 'secret'
 }
 

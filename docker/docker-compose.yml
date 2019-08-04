@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    container_name: db
+    image: mysql:8.0.17
+    ports:
+      - "3306:3306" 
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecret
+      MYSQL_DATABASE: healthmonitor
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
