@@ -24,7 +24,7 @@ npm start --port 3000
 
 ### Server:
 
-requires gradle
+requires java and gradle
 
 cd .../disease-classifier/server  
 gradle bootRun
