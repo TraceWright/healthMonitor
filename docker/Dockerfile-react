@@ -1,0 +1,15 @@
+FROM debian:stretch
+
+RUN bash -c ' \
+    apt-get update && \
+    apt-get install -y --no-install-recommends curl git ca-certificates && \
+    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+    apt-get install -y nodejs && \
+    cd /usr/src/ && \
+    git clone https://github.com/TraceWright/healthMonitor.git . && \
+    cd /usr/src/disease-classifier/client && \
+    npm install \
+    '
+
+EXPOSE 3000
+CMD npm start

@@ -1,0 +1,19 @@
+FROM debian:stretch
+
+RUN bash -c ' \
+    apt-get update && \
+    apt-get install -y --no-install-recommends openjdk-8-jdk git wget unzip && \
+    wget -nv https://services.gradle.org/distributions/gradle-5.2.1-bin.zip -P /tmp && \
+    unzip -d /opt/gradle /tmp/gradle-*.zip && \
+    export GRADLE_HOME=/opt/gradle/gradle-5.2.1 && \
+    export PATH=${GRADLE_HOME}/bin:${PATH} && \
+    cd /usr/src/ && \
+    git clone https://github.com/TraceWright/healthMonitor.git . && \
+    cd /usr/src/disease-classifier/server && \
+    gradle build -x test \
+    '
+
+WORKDIR /usr/src/disease-classifier/server
+
+EXPOSE 8080
+ENTRYPOINT ["./docker_run.sh"]

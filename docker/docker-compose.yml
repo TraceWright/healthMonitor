@@ -1,5 +1,27 @@
 version: '3'
 services:
+  client:
+    container_name: react-clientside
+    build:
+      context: ./
+      dockerfile: Dockerfile-react
+    ports:
+      - "3000:3000"
+  server:
+    container_name: springboot-serverside
+    depends_on:
+      - db
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    build:
+      context: ./
+      dockerfile: Dockerfile-spring
+    links:
+      - "db:database"
+    ports:
+      - "8080:8080"
   db:
     container_name: db
     image: mysql:8.0.17
