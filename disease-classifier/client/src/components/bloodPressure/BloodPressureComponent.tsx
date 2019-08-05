@@ -141,11 +141,11 @@ class Hypertension extends React.PureComponent<IProps, IState> {
                             console.error(response.error);
                         }
                     }
-                } else if (response.sysBp && response.diaBp && response.atDate) {
+                } else if (response.bp && response.bp.sysBp && response.bp.diaBp && response.bp.atDate && typeof response.classification === "number") {
                     this.setState({
-                        sysBp: response.sysBp,
-                        diaBp: response.diaBp,
-                        atDate: new Date(response.atDate),
+                        sysBp: response.bp.sysBp,
+                        diaBp: response.bp.diaBp,
+                        atDate: new Date(response.bp.atDate),
                         classification: response.classification,
                         success: true,
                         checkmark: true,

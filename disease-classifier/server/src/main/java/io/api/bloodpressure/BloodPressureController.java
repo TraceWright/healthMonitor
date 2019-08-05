@@ -4,17 +4,14 @@ import javax.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import io.api.bloodpressure.bloodpressuremodels.BloodPressureEvaluate;
+import io.api.bloodpressure.bloodpressuremodels.BloodPressure;
 
 @RestController
-public class BloodPressureController {
+public class BloodPressureController extends BloodPressureService {
 
     @PostMapping("/bloodpressure")
-    public BloodPressure bp(@Valid @RequestBody BloodPressure hypertension) {
-        return new BloodPressure(
-            hypertension.getSysBp(),
-            hypertension.getDiaBp(),
-            hypertension.getAtDate(),
-            hypertension.getClassification()
-        );
+    public BloodPressureEvaluate bp(@Valid @RequestBody BloodPressure bp) {
+        return EvaluateBloodPressure(bp);
     }
 }
