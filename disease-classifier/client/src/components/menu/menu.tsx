@@ -19,7 +19,7 @@ class MenuContainer extends React.PureComponent<IProps, IState> {
             { text: 'Home' },
             { text: 'Blood Pressure' },
             { text: 'Egfr' },
-            { text: 'History' },
+            // { text: 'History' },
             { text: 'Contact' },
         ],
         redirect: false,
