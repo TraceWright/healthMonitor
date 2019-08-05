@@ -200,7 +200,7 @@ class Hypertension extends React.PureComponent<IProps, IState> {
             <DatePicker
                 selected={this.state.atDate}
                 onChange={(e) => this.dateChangeHandler(e)}
-                dateFormat="dd/MM/yyyy"
+                dateFormat="yyyy/MM/dd"
                 disabled={this.state.submitted ? true : false}
             />
             <label

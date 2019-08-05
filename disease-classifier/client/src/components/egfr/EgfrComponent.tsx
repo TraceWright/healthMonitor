@@ -181,6 +181,7 @@ class EgfrComponent extends React.PureComponent<IProps, IState> {
         <DatePicker
             selected={this.state.atDate}
             onChange={(event) => this.dateChangeHandler(event)}
+            dateFormat="yyyy/MM/dd"
         />
         <label
             className="validation-error"
