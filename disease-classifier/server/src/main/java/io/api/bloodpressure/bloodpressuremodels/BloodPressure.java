@@ -1,5 +1,6 @@
 package io.api.bloodpressure.bloodpressuremodels;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
@@ -32,8 +33,9 @@ public class BloodPressure {
         return diaBp;
     }
 
-    public Date getAtDate() {
-        return atDate;
+    public String getAtDate() {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy/MM/dd");
+        return f.format(atDate);
     }
 
 }
