@@ -47,3 +47,7 @@ CREATE USER 'user'@'%' IDENTIFIED BY 'secret';
 GRANT ALL PRIVILEGES ON &ast;.&ast; TO 'user';  
 CREATE DATABASE healthmonitor;  
 gradle flywayMigrate -i   
+
+### Test:
+
+gradle test
