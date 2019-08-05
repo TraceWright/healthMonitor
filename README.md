@@ -26,6 +26,11 @@ npm start --port 3000
 
 requires java and gradle
 
+update application.properties to the following:  
+
+&nbsp;&nbsp;spring.datasource.username=user  
+&nbsp;&nbsp;spring.datasource.password=secret
+
 cd .../disease-classifier/server  
 gradle bootRun
 
