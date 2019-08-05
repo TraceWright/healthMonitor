@@ -17,7 +17,7 @@ note: localhost ports 3000, 8080, and 3306 must be available for use by the app.
 
 docker-compose down  
 docker images  
-docker image rm <image id> <image id> <image id>  
+docker image rm 'image-id' 'image id' 'image id'    
 
 
 ## Build components individually
