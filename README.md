@@ -17,7 +17,7 @@ note: localhost ports 3000, 8080, and 3306 must be available for use by the app.
 
 docker-compose down  
 docker images  
-docker image rm 'image-id' 'image id' 'image id'    
+docker image rm 'image-id' 'image-id' 'image-id'    
 
 
 ## Build components individually
@@ -30,21 +30,7 @@ cd .../disease-classifier/client
 npm install  
 npm start --port 3000
 
-### Server:
-
-requires java and gradle
-
-update application.properties to the following:  
-
-&nbsp;&nbsp;spring.datasource.username=user  
-&nbsp;&nbsp;spring.datasource.password=secret
-
-cd .../disease-classifier/server  
-gradle bootRun
-
 ### Database:
-
-MySQL
 
 requires docker
 
@@ -54,7 +40,19 @@ docker exec -it <container_id> mysql -uroot -p
 CREATE USER 'user'@'%' IDENTIFIED BY 'secret';   
 GRANT ALL PRIVILEGES ON &ast;.&ast; TO 'user';  
 CREATE DATABASE healthmonitor;  
-gradle flywayMigrate -i   
+gradle flywayMigrate -i  
+
+### Server:
+
+requires java and gradle (also have the database up and running prior to starting the spring app)
+
+update application.properties to the following:  
+
+&nbsp;&nbsp;spring.datasource.username=user  
+&nbsp;&nbsp;spring.datasource.password=secret
+
+cd .../disease-classifier/server  
+gradle bootRun    
 
 ### Test:
 
